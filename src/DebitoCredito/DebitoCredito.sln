@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DebitoCredito.Infra", "Debi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DebitoCredito.Dominio", "DebitoCredito.Dominio\DebitoCredito.Dominio.csproj", "{64EF85D8-9CBE-4E89-BECD-9DB758095074}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DebitoCredito.Servico", "DebitoCredito.Servico\DebitoCredito.Servico.csproj", "{79E5695C-B01F-4B2D-AFC9-5F2D6A0C6974}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{64EF85D8-9CBE-4E89-BECD-9DB758095074}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64EF85D8-9CBE-4E89-BECD-9DB758095074}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64EF85D8-9CBE-4E89-BECD-9DB758095074}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79E5695C-B01F-4B2D-AFC9-5F2D6A0C6974}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79E5695C-B01F-4B2D-AFC9-5F2D6A0C6974}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79E5695C-B01F-4B2D-AFC9-5F2D6A0C6974}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79E5695C-B01F-4B2D-AFC9-5F2D6A0C6974}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
