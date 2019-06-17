@@ -3,9 +3,9 @@ using System;
 using System.Linq;
 using System.Text;
 using System.Net.Http;
+using Newtonsoft.Json;
 using System.Threading.Tasks;
 using DebitoCredito.Teste.Configs;
-using Newtonsoft.Json;
 
 namespace DebitoCredito.Teste.Controller
 {
