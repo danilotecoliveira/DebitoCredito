@@ -1,5 +1,7 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Net;
+using DebitoCredito.Dominio.Entidades;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DebitoCredito.Aplicacao.Controllers
@@ -16,7 +18,7 @@ namespace DebitoCredito.Aplicacao.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] string value)
+        public IActionResult Post([FromBody] Transacao transacao)
         {
             Response.Headers.Add("id-request", _idRequest);
 

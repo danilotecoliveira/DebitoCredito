@@ -18,4 +18,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DebitoCredito.Dominio\DebitoCredito.Dominio.csproj" />
+    <ProjectReference Include="..\DebitoCredito.Infra\DebitoCredito.Infra.csproj" />
+    <ProjectReference Include="..\DebitoCredito.Servico\DebitoCredito.Servico.csproj" />
+  </ItemGroup>
+
 </Project>

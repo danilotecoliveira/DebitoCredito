@@ -6,6 +6,7 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 using DebitoCredito.Teste.Configs;
+using DebitoCredito.Dominio.Entidades;
 
 namespace DebitoCredito.Teste.Controller
 {
@@ -21,7 +22,14 @@ namespace DebitoCredito.Teste.Controller
         [Fact]
         public async Task Teste_Transacao()
         {
-            var content = new StringContent(JsonConvert.SerializeObject("transacao"), Encoding.UTF8, "application/json");
+            var transacao = new
+            {
+                ContaOrigem = new ContaCorrente { Id = Guid.NewGuid(), Cpf = "", Numero = "" },
+                ContaDestino = new ContaCorrente { Id = Guid.NewGuid(), Cpf = "", Numero = "" },
+                Valor = 0
+            };
+
+            var content = new StringContent(JsonConvert.SerializeObject(transacao), Encoding.UTF8, "application/json");
 
             using (var response = await _testContext.Client.PostAsync($"/api/Transacao", content))
             {

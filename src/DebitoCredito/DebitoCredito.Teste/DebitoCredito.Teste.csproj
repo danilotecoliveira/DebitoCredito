@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DebitoCredito.Aplicacao\DebitoCredito.Aplicacao.csproj" />
+    <ProjectReference Include="..\DebitoCredito.Dominio\DebitoCredito.Dominio.csproj" />
   </ItemGroup>
 
 </Project>
