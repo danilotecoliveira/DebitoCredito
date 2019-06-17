@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DebitoCredito.Aplicacao.Controllers
@@ -15,9 +16,11 @@ namespace DebitoCredito.Aplicacao.Controllers
         }
 
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Post([FromBody] string value)
         {
             Response.Headers.Add("id-request", _idRequest);
+
+            return StatusCode(HttpStatusCode.OK.GetHashCode());
         }
     }
 }
