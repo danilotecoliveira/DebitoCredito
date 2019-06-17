@@ -1,8 +1,8 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 using System.Net;
-using DebitoCredito.Dominio.Entidades;
 using Microsoft.AspNetCore.Mvc;
+using DebitoCredito.Dominio.Entidades;
+using DebitoCredito.Dominio.Interfaces.Servicos;
 
 namespace DebitoCredito.Aplicacao.Controllers
 {
@@ -11,9 +11,11 @@ namespace DebitoCredito.Aplicacao.Controllers
     public class TransacaoController : ControllerBase
     {
         private readonly string _idRequest;
+        private readonly ITransacao _transacao;
 
-        public TransacaoController()
+        public TransacaoController(ITransacao transacao)
         {
+            _transacao = transacao;
             _idRequest = Guid.NewGuid().ToString();
         }
 
@@ -22,7 +24,16 @@ namespace DebitoCredito.Aplicacao.Controllers
         {
             Response.Headers.Add("id-request", _idRequest);
 
-            return StatusCode(HttpStatusCode.OK.GetHashCode());
+            try
+            {
+                var validarTransacao = _transacao.ValidarTransacao(transacao);
+
+                return StatusCode(HttpStatusCode.OK.GetHashCode());
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(HttpStatusCode.InternalServerError.GetHashCode(), "Erro interno");
+            }
         }
     }
 }

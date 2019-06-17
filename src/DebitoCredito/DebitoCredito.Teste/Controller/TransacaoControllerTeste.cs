@@ -24,8 +24,8 @@ namespace DebitoCredito.Teste.Controller
         {
             var transacao = new
             {
-                ContaOrigem = new ContaCorrente { Id = Guid.NewGuid(), Cpf = "", Numero = "" },
-                ContaDestino = new ContaCorrente { Id = Guid.NewGuid(), Cpf = "", Numero = "" },
+                ContaOrigem = new ContaCorrente { Id = Guid.NewGuid(), Numero = "" },
+                ContaDestino = new ContaCorrente { Id = Guid.NewGuid(), Numero = "" },
                 Valor = 0
             };
 
