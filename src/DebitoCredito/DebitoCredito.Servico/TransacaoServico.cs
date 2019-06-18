@@ -22,14 +22,26 @@ namespace DebitoCredito.Servico
                 erros.Add(validarValor);
             }
 
-            
+            var validarContasCorrentes = ValidarContaCorrente(transacao.ContaOrigem.Numero, transacao.ContaDestino.Numero);
+            if (!string.IsNullOrWhiteSpace(validarContasCorrentes))
+            {
+                erros.Add(validarContasCorrentes);
+            }
 
             return erros;
         }
 
         private string ValidarValor(decimal valor)
         {
-            return (valor < 0) ? "O valor da transação não pode ser negativo": string.Empty;
+            return (valor <= 0) ? "O valor da transação não pode ser negativo nem igual a zero": string.Empty;
+        }
+
+        private string ValidarContaCorrente(string contaOrigem, string contaDestino)
+        {
+            return 
+                (string.IsNullOrWhiteSpace(contaOrigem) || string.IsNullOrWhiteSpace(contaDestino)) 
+                ? "Os números das contas não podem ser vazios" 
+                : string.Empty;
         }
     }
 }
