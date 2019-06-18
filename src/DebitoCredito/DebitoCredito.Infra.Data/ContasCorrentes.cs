@@ -2,9 +2,9 @@
 using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Threading.Tasks;
 using DebitoCredito.Dominio.Entidades;
 using DebitoCredito.Dominio.Interfaces.Infra;
-using System.Threading.Tasks;
 
 namespace DebitoCredito.Infra.Data
 {

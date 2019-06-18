@@ -3,6 +3,7 @@ using System.Net;
 using System.Linq;
 using DebitoCredito.Infra;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using DebitoCredito.Dominio.Entidades;
 using DebitoCredito.Dominio.Interfaces.Servicos;
 
@@ -21,6 +22,9 @@ namespace DebitoCredito.Aplicacao.Controllers
             _idRequest = Guid.NewGuid();
         }
 
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(IEnumerable<string>), (int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(string), (int)HttpStatusCode.InternalServerError)]
         [HttpPost]
         public IActionResult Post([FromBody] Transacao transacao)
         {
