@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DebitoCredito.Servico;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using DebitoCredito.Dominio.Interfaces.Servicos;
 
 namespace DebitoCredito.Aplicacao
 {
@@ -18,6 +20,8 @@ namespace DebitoCredito.Aplicacao
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<ITransacaoServico, TransacaoServico>();
+
             services.AddSwaggerGen();
             services.AddSwaggerGen(c =>
             {

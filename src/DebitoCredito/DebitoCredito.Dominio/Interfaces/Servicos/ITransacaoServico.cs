@@ -4,7 +4,7 @@ using DebitoCredito.Dominio.Entidades;
 
 namespace DebitoCredito.Dominio.Interfaces.Servicos
 {
-    public interface ITransacao
+    public interface ITransacaoServico
     {
         IEnumerable<string> ValidarTransacao(Transacao transacao);
         Task RealizarTransacao(ContaCorrente contaOrigem, ContaCorrente contaDestino, Lancamento lancamento);
