@@ -7,6 +7,7 @@ namespace DebitoCredito.Dominio.Interfaces.Infra
     {
         bool ValidarContaCadastrada(string contaCorrente);
         bool RealizarDebito(string contaOrigem, decimal valor);
+        bool RealizarCredito(string contaDestino, decimal valor);
         Task InserirLancamentoAsync(Lancamento lancamento);
     }
 }

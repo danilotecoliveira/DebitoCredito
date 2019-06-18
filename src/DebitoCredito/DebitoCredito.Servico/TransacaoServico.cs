@@ -35,6 +35,23 @@ namespace DebitoCredito.Servico
 
             _contasCorrentes.InserirLancamentoAsync(lancamentoDebito);
 
+            var realizarCredito = _contasCorrentes.RealizarCredito(transacao.ContaDestino.Numero, transacao.Valor);
+
+            if (!realizarCredito)
+            {
+                throw new ArgumentException("Erro ao realizar o crédito");
+            }
+
+            var lancamentoCredito = new Lancamento
+            {
+                Acao = "DEBITO",
+                IdTransacao = VariaveisGlobais.Transacao,
+                NumeroContaCorrente = transacao.ContaOrigem.Numero,
+                Valor = transacao.Valor
+            };
+
+            _contasCorrentes.InserirLancamentoAsync(lancamentoCredito);
+
             return true;
         }
 

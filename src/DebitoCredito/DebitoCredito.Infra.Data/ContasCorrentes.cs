@@ -64,16 +64,17 @@ namespace DebitoCredito.Infra.Data
             }
         }
 
-        public bool RealizarCredito(string contaCorrenteDestino)
+        public bool RealizarCredito(string contaDestino, decimal valor)
         {
             using (var conn = new SqlConnection(VariaveisGlobais.Conn))
             {
                 var param = new
                 {
-                    CONTACORRENTE = contaCorrenteDestino
+                    CONTACORRENTE = contaDestino,
+                    VALOR = Convert.ToDecimal(valor)
                 };
 
-                var resultado = conn.QueryFirstOrDefault<int>("SELECT COUNT(NUMERO) FROM CONTASCORRENTES WHERE NUMERO = @CONTACORRENTE", param, commandType: CommandType.Text);
+                var resultado = conn.Execute("UPDATE CONTASCORRENTES SET SALDOATUAL = SALDOATUAL + @VALOR WHERE NUMERO = @CONTACORRENTE", param, commandType: CommandType.Text);
 
                 return resultado == 1;
             }

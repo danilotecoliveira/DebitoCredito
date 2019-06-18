@@ -40,6 +40,16 @@ namespace DebitoCredito.Teste.Infra
             Assert.True(resultado);
         }
 
+        [Theory]
+        [InlineData("0123", 1)]
+        [InlineData("0123", 0.99)]
+        public void Testar_Realizar_Credito(string contaCorrente, decimal valor)
+        {
+            var resultado = _contasCorrentes.RealizarCredito(contaCorrente, valor);
+
+            Assert.True(resultado);
+        }
+
         [Fact]
         public void Testar_Inserir_Lancamento()
         {
