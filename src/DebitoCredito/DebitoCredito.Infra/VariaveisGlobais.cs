@@ -7,6 +7,7 @@
         }
 
         private static string _conn;
+        private static string _idTransacao;
 
         public static string Conn
         {
@@ -23,6 +24,19 @@
             private set
             {
                 _conn = value;
+            }
+        }
+
+        public static string Transacao
+        {
+            get
+            {
+                return _idTransacao;
+            }
+
+            set
+            {
+                _idTransacao = value;
             }
         }
     }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Linq;
+using DebitoCredito.Infra;
 using Microsoft.AspNetCore.Mvc;
 using DebitoCredito.Dominio.Entidades;
 using DebitoCredito.Dominio.Interfaces.Servicos;
@@ -24,6 +25,7 @@ namespace DebitoCredito.Aplicacao.Controllers
         public IActionResult Post([FromBody] Transacao transacao)
         {
             Response.Headers.Add("id-request", _idRequest);
+            VariaveisGlobais.Transacao = _idRequest;
 
             try
             {

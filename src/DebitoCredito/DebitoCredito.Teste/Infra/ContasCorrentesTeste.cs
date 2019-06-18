@@ -1,5 +1,7 @@
 ﻿using Xunit;
+using System;
 using DebitoCredito.Infra.Data;
+using DebitoCredito.Dominio.Entidades;
 using DebitoCredito.Dominio.Interfaces.Infra;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -36,6 +38,22 @@ namespace DebitoCredito.Teste.Infra
             var resultado = _contasCorrentes.RealizarDebito(contaCorrente, valor);
 
             Assert.True(resultado);
+        }
+
+        [Fact]
+        public void Testar_Inserir_Lancamento()
+        {
+            var lancamento = new Lancamento
+            {
+                Acao = "DEBITO",
+                IdTransacao = Guid.NewGuid(),
+                NumeroContaCorrente = "0123",
+                Valor = 1
+            };
+
+            _contasCorrentes.InserirLancamento(lancamento);
+
+            Assert.True(true);
         }
     }
 }

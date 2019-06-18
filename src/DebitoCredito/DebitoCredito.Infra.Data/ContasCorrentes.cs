@@ -2,6 +2,7 @@
 using System;
 using System.Data;
 using System.Data.SqlClient;
+using DebitoCredito.Dominio.Entidades;
 using DebitoCredito.Dominio.Interfaces.Infra;
 
 namespace DebitoCredito.Infra.Data
@@ -36,6 +37,29 @@ namespace DebitoCredito.Infra.Data
                 var resultado = conn.Execute("UPDATE CONTASCORRENTES SET SALDOATUAL = SALDOATUAL - @VALOR WHERE NUMERO = @CONTACORRENTE", param, commandType: CommandType.Text);
 
                 return resultado == 1;
+            }
+        }
+
+        public void InserirLancamento(Lancamento lancamento)
+        {
+            using (var conn = new SqlConnection(VariaveisGlobais.Conn))
+            {
+                var param = new
+                {
+                    ACAO = lancamento.Acao,
+                    ID = lancamento.Id,
+                    IDTRANSACAO = lancamento.IdTransacao,
+                    NUMEROCONTACORRENTE = lancamento.NumeroContaCorrente,
+                    VALOR = Convert.ToDecimal(lancamento.Valor),
+                    DATALANCAMENTO = lancamento.DataLancamento
+                };
+
+                var query = @"INSERT INTO LANCAMENTOS 
+                                (ID, IDTRANSACAO, ACAO, NUMEROCONTACORRENTE, VALOR, DATALANCAMENTO) 
+                            VALUES
+                                (@ID, @IDTRANSACAO, @ACAO, @NUMEROCONTACORRENTE, @VALOR, @DATALANCAMENTO)";
+
+                conn.Execute(query, param, commandType: CommandType.Text);
             }
         }
 
