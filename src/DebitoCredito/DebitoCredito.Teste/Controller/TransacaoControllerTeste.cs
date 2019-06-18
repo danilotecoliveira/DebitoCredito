@@ -39,14 +39,16 @@ namespace DebitoCredito.Teste.Controller
             }
         }
 
-        [Fact]
-        public async Task Teste_Valor_Negativo()
+        [Theory]
+        [InlineData("", "", -1, 400)]
+        [InlineData("0123", "3210", 1, 200)]
+        public async Task Teste_Valor_Negativo(string contaOrigem, string contaDestino, decimal valor, int statusCode)
         {
             var transacao = new
             {
-                ContaOrigem = new ContaCorrente { Id = Guid.NewGuid(), Numero = "" },
-                ContaDestino = new ContaCorrente { Id = Guid.NewGuid(), Numero = "" },
-                Valor = -1
+                ContaOrigem = new ContaCorrente { Id = Guid.NewGuid(), Numero = contaOrigem },
+                ContaDestino = new ContaCorrente { Id = Guid.NewGuid(), Numero = contaDestino },
+                Valor = valor
             };
 
             var content = new StringContent(JsonConvert.SerializeObject(transacao), Encoding.UTF8, "application/json");
@@ -55,7 +57,12 @@ namespace DebitoCredito.Teste.Controller
             {
                 var guid = response.Headers.GetValues("id-request").FirstOrDefault();
 
-                Assert.Equal(400, response.StatusCode.GetHashCode());
+                if (response.IsSuccessStatusCode)
+                {
+                    Assert.Equal(statusCode, response.StatusCode.GetHashCode());
+                }
+
+                Assert.Equal(statusCode, response.StatusCode.GetHashCode());
                 Assert.True(Guid.TryParse(guid, out _));
             }
         }

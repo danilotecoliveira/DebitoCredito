@@ -36,10 +36,12 @@ namespace DebitoCredito.Aplicacao.Controllers
                     return StatusCode(HttpStatusCode.BadRequest.GetHashCode(), validarTransacao);
                 }
 
-                // faz o débito
-                _transacaoServico.RealizarTransacao(transacao);
+                var realizarTransacao = _transacaoServico.RealizarTransacao(transacao);
 
-                // faz o crédito
+                if (!realizarTransacao)
+                {
+                    return StatusCode(HttpStatusCode.InternalServerError.GetHashCode(), "Erro ao realizar a transação");
+                }
 
                 return StatusCode(HttpStatusCode.OK.GetHashCode());
             }

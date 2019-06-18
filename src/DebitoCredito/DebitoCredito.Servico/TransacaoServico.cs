@@ -22,7 +22,7 @@ namespace DebitoCredito.Servico
 
             if (!realizarDebito)
             {
-                throw new ArgumentException("Erro ao realizar o débito");
+                return false;
             }
 
             var lancamentoDebito = new Lancamento
@@ -39,14 +39,14 @@ namespace DebitoCredito.Servico
 
             if (!realizarCredito)
             {
-                throw new ArgumentException("Erro ao realizar o crédito");
+                return false;
             }
 
             var lancamentoCredito = new Lancamento
             {
-                Acao = "DEBITO",
+                Acao = "CREDITO",
                 IdTransacao = VariaveisGlobais.Transacao,
-                NumeroContaCorrente = transacao.ContaOrigem.Numero,
+                NumeroContaCorrente = transacao.ContaDestino.Numero,
                 Valor = transacao.Valor
             };
 
