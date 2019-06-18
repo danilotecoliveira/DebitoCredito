@@ -22,6 +22,8 @@ namespace DebitoCredito.Servico
                 erros.Add(validarValor);
             }
 
+            
+
             return erros;
         }
 

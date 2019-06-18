@@ -1,11 +1,9 @@
-﻿using DebitoCredito.Servico;
+﻿using Xunit;
+using System;
+using DebitoCredito.Servico;
+using DebitoCredito.Dominio.Entidades;
 using Microsoft.Extensions.DependencyInjection;
 using DebitoCredito.Dominio.Interfaces.Servicos;
-using DebitoCredito.Dominio.Entidades;
-using System;
-using System.Threading.Tasks;
-using Xunit;
-using System.Linq;
 
 namespace DebitoCredito.Teste.Servicos
 {
@@ -23,19 +21,20 @@ namespace DebitoCredito.Teste.Servicos
             _transacaoServico = serviceProvider.GetService<ITransacaoServico>();
         }
 
-        [Fact]
-        public void Testa_Valor_Negativo()
+        [Theory]
+        [InlineData("O valor da transação não pode ser negativo", -1)]
+        public void Testa_Valor_Negativo(string msgErro, int valor)
         {
             var transacao = new Transacao
             {
                 ContaOrigem = new ContaCorrente { Id = Guid.NewGuid(), Numero = "" },
                 ContaDestino = new ContaCorrente { Id = Guid.NewGuid(), Numero = "" },
-                Valor = -1
+                Valor = valor
             };
 
             var erro = _transacaoServico.ValidarTransacao(transacao);
 
-            Assert.Contains("O valor da transação não pode ser negativo", erro);
+            Assert.Contains(msgErro, erro);
         }
     }
 }
