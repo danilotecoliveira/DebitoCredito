@@ -31,7 +31,7 @@ namespace DebitoCredito.Teste.Servicos
         [InlineData("Os números das contas não podem ser vazios", "", "3210", 1)]
         [InlineData("As contas correntes devem estar cadastradas", "01234", "3210", 1)]
         [InlineData("As contas correntes devem estar cadastradas", "0123", "43210", 1)]
-        public void Testa_Transacao(string msgErro, string contaOrigem, string contaDestino, int valor)
+        public void Testa_Erros_Transacao(string msgErro, string contaOrigem, string contaDestino, int valor)
         {
             var transacao = new Transacao
             {
@@ -43,6 +43,22 @@ namespace DebitoCredito.Teste.Servicos
             var erro = _transacaoServico.ValidarTransacao(transacao);
 
             Assert.Contains(msgErro, erro);
+        }
+
+        [Theory]
+        [InlineData("0123", "3210", 1)]
+        public void Testa_Transacao(string contaOrigem, string contaDestino, int valor)
+        {
+            var transacao = new Transacao
+            {
+                ContaOrigem = new ContaCorrente { Id = Guid.NewGuid(), Numero = contaOrigem },
+                ContaDestino = new ContaCorrente { Id = Guid.NewGuid(), Numero = contaDestino },
+                Valor = valor
+            };
+
+            var realizarTransacao = _transacaoServico.RealizarTransacao(transacao);
+
+            Assert.True(realizarTransacao);
         }
     }
 }

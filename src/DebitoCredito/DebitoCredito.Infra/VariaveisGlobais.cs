@@ -1,4 +1,6 @@
-﻿namespace DebitoCredito.Infra
+﻿using System;
+
+namespace DebitoCredito.Infra
 {
     public sealed class VariaveisGlobais
     {
@@ -7,7 +9,7 @@
         }
 
         private static string _conn;
-        private static string _idTransacao;
+        private static Guid _idTransacao;
 
         public static string Conn
         {
@@ -27,7 +29,7 @@
             }
         }
 
-        public static string Transacao
+        public static Guid Transacao
         {
             get
             {

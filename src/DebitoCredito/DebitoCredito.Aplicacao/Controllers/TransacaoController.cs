@@ -12,19 +12,19 @@ namespace DebitoCredito.Aplicacao.Controllers
     [ApiController]
     public class TransacaoController : ControllerBase
     {
-        private readonly string _idRequest;
+        private readonly Guid _idRequest;
         private readonly ITransacaoServico _transacaoServico;
 
         public TransacaoController(ITransacaoServico transacaoServico)
         {
             _transacaoServico = transacaoServico;
-            _idRequest = Guid.NewGuid().ToString();
+            _idRequest = Guid.NewGuid();
         }
 
         [HttpPost]
         public IActionResult Post([FromBody] Transacao transacao)
         {
-            Response.Headers.Add("id-request", _idRequest);
+            Response.Headers.Add("id-request", _idRequest.ToString());
             VariaveisGlobais.Transacao = _idRequest;
 
             try
@@ -37,7 +37,7 @@ namespace DebitoCredito.Aplicacao.Controllers
                 }
 
                 // faz o débito
-                _transacaoServico.RealizarDebito(transacao.ContaOrigem.Numero, transacao.Valor);
+                _transacaoServico.RealizarTransacao(transacao);
 
                 // faz o crédito
 

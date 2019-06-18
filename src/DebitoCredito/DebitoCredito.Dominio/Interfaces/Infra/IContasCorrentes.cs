@@ -1,4 +1,5 @@
-﻿using DebitoCredito.Dominio.Entidades;
+﻿using System.Threading.Tasks;
+using DebitoCredito.Dominio.Entidades;
 
 namespace DebitoCredito.Dominio.Interfaces.Infra
 {
@@ -6,6 +7,6 @@ namespace DebitoCredito.Dominio.Interfaces.Infra
     {
         bool ValidarContaCadastrada(string contaCorrente);
         bool RealizarDebito(string contaOrigem, decimal valor);
-        void InserirLancamento(Lancamento lancamento);
+        Task InserirLancamentoAsync(Lancamento lancamento);
     }
 }

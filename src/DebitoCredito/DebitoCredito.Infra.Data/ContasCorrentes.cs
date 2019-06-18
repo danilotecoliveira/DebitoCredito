@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using DebitoCredito.Dominio.Entidades;
 using DebitoCredito.Dominio.Interfaces.Infra;
+using System.Threading.Tasks;
 
 namespace DebitoCredito.Infra.Data
 {
@@ -40,7 +41,7 @@ namespace DebitoCredito.Infra.Data
             }
         }
 
-        public void InserirLancamento(Lancamento lancamento)
+        public async Task InserirLancamentoAsync(Lancamento lancamento)
         {
             using (var conn = new SqlConnection(VariaveisGlobais.Conn))
             {
@@ -48,7 +49,7 @@ namespace DebitoCredito.Infra.Data
                 {
                     ACAO = lancamento.Acao,
                     ID = lancamento.Id,
-                    IDTRANSACAO = lancamento.IdTransacao,
+                    IDTRANSACAO = lancamento.IdTransacao.ToString(),
                     NUMEROCONTACORRENTE = lancamento.NumeroContaCorrente,
                     VALOR = Convert.ToDecimal(lancamento.Valor),
                     DATALANCAMENTO = lancamento.DataLancamento
@@ -59,7 +60,7 @@ namespace DebitoCredito.Infra.Data
                             VALUES
                                 (@ID, @IDTRANSACAO, @ACAO, @NUMEROCONTACORRENTE, @VALOR, @DATALANCAMENTO)";
 
-                conn.Execute(query, param, commandType: CommandType.Text);
+                await conn.ExecuteAsync(query, param, commandType: CommandType.Text);
             }
         }
 

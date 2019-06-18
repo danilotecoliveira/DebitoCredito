@@ -6,6 +6,6 @@ namespace DebitoCredito.Dominio.Interfaces.Servicos
     public interface ITransacaoServico
     {
         IEnumerable<string> ValidarTransacao(Transacao transacao);
-        bool RealizarDebito(string contaOrigem, decimal valor);
+        bool RealizarTransacao(Transacao transacao);
     }
 }

@@ -51,7 +51,7 @@ namespace DebitoCredito.Teste.Infra
                 Valor = 1
             };
 
-            _contasCorrentes.InserirLancamento(lancamento);
+            _contasCorrentes.InserirLancamentoAsync(lancamento);
 
             Assert.True(true);
         }

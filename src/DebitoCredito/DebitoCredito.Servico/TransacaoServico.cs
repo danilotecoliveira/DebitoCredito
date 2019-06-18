@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using DebitoCredito.Infra;
 using System.Collections.Generic;
 using DebitoCredito.Dominio.Entidades;
 using DebitoCredito.Dominio.Interfaces.Infra;
@@ -15,13 +16,26 @@ namespace DebitoCredito.Servico
             _contasCorrentes = contasCorrentes;
         }
 
-        public bool RealizarDebito(string contaOrigem, decimal valor)
+        public bool RealizarTransacao(Transacao transacao)
         {
-            // faz o débito no banco de dados 
+            var realizarDebito = _contasCorrentes.RealizarDebito(transacao.ContaOrigem.Numero, transacao.Valor);
 
-            // insere o registro na tabela de lancamentos
+            if (!realizarDebito)
+            {
+                throw new ArgumentException("Erro ao realizar o débito");
+            }
 
-            return false;
+            var lancamentoDebito = new Lancamento
+            {
+                Acao = "DEBITO",
+                IdTransacao = VariaveisGlobais.Transacao,
+                NumeroContaCorrente = transacao.ContaOrigem.Numero,
+                Valor = transacao.Valor
+            };
+
+            _contasCorrentes.InserirLancamentoAsync(lancamentoDebito);
+
+            return true;
         }
 
         public IEnumerable<string> ValidarTransacao(Transacao transacao)
