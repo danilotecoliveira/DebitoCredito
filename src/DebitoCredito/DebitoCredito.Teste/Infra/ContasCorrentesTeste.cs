@@ -15,6 +15,7 @@ namespace DebitoCredito.Teste.Infra
         {
             var services = new ServiceCollection();
             services.AddTransient<IContasCorrentes, ContasCorrentes>();
+            services.AddLogging(logger => logger.Services.AddTransient<ContasCorrentes>());
 
             var serviceProvider = services.BuildServiceProvider();
             _contasCorrentes = serviceProvider.GetService<IContasCorrentes>();
