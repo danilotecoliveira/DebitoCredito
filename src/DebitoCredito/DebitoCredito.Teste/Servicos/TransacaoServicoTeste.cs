@@ -18,6 +18,7 @@ namespace DebitoCredito.Teste.Servicos
             var services = new ServiceCollection();
             services.AddTransient<ITransacaoServico, TransacaoServico>();
             services.AddTransient<IContasCorrentes, ContasCorrentes>();
+            services.AddTransient<ILancamentos, Lancamentos>();
             services.AddLogging(configuration => configuration.Services.AddTransient<TransacaoServico>());
 
             var serviceProvider = services.BuildServiceProvider();
@@ -35,8 +36,8 @@ namespace DebitoCredito.Teste.Servicos
         {
             var transacao = new Transacao
             {
-                ContaOrigem = new ContaCorrente { Id = Guid.NewGuid(), Numero = contaOrigem },
-                ContaDestino = new ContaCorrente { Id = Guid.NewGuid(), Numero = contaDestino },
+                ContaOrigem = new ContaCorrente { Id = Guid.NewGuid().ToString(), Numero = contaOrigem },
+                ContaDestino = new ContaCorrente { Id = Guid.NewGuid().ToString(), Numero = contaDestino },
                 Valor = valor
             };
 
@@ -51,8 +52,8 @@ namespace DebitoCredito.Teste.Servicos
         {
             var transacao = new Transacao
             {
-                ContaOrigem = new ContaCorrente { Id = Guid.NewGuid(), Numero = contaOrigem },
-                ContaDestino = new ContaCorrente { Id = Guid.NewGuid(), Numero = contaDestino },
+                ContaOrigem = new ContaCorrente { Id = Guid.NewGuid().ToString(), Numero = contaOrigem },
+                ContaDestino = new ContaCorrente { Id = Guid.NewGuid().ToString(), Numero = contaDestino },
                 Valor = valor
             };
 

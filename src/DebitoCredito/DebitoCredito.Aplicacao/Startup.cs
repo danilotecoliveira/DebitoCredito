@@ -23,6 +23,7 @@ namespace DebitoCredito.Aplicacao
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<ILancamentos, Lancamentos>();
             services.AddTransient<IContasCorrentes, ContasCorrentes>();
             services.AddTransient<ITransacaoServico, TransacaoServico>();
 

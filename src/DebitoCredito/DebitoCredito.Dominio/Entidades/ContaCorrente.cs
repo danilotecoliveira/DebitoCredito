@@ -6,7 +6,7 @@ namespace DebitoCredito.Dominio.Entidades
     public class ContaCorrente
     {
         [JsonIgnore]
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         public string Numero { get; set; }
 

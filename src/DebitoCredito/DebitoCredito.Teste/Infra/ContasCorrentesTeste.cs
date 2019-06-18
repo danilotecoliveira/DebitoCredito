@@ -50,21 +50,5 @@ namespace DebitoCredito.Teste.Infra
 
             Assert.True(resultado);
         }
-
-        [Fact]
-        public void Testar_Inserir_Lancamento()
-        {
-            var lancamento = new Lancamento
-            {
-                Acao = "DEBITO",
-                IdTransacao = Guid.NewGuid(),
-                NumeroContaCorrente = "0123",
-                Valor = 1
-            };
-
-            _contasCorrentes.InserirLancamentoAsync(lancamento);
-
-            Assert.True(true);
-        }
     }
 }

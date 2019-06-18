@@ -1,5 +1,4 @@
-﻿using System;
-using DebitoCredito.Infra;
+﻿using DebitoCredito.Infra;
 using System.Collections.Generic;
 using DebitoCredito.Dominio.Entidades;
 using DebitoCredito.Dominio.Interfaces.Infra;
@@ -9,10 +8,12 @@ namespace DebitoCredito.Servico
 {
     public class TransacaoServico : ITransacaoServico
     {
+        private readonly ILancamentos _lancamentos;
         private readonly IContasCorrentes _contasCorrentes;
 
-        public TransacaoServico(IContasCorrentes contasCorrentes)
+        public TransacaoServico(ILancamentos lancamentos, IContasCorrentes contasCorrentes)
         {
+            _lancamentos = lancamentos;
             _contasCorrentes = contasCorrentes;
         }
 
@@ -28,12 +29,12 @@ namespace DebitoCredito.Servico
             var lancamentoDebito = new Lancamento
             {
                 Acao = "DEBITO",
-                IdTransacao = VariaveisGlobais.Transacao,
+                IdTransacao = VariaveisGlobais.Transacao.ToString(),
                 NumeroContaCorrente = transacao.ContaOrigem.Numero,
                 Valor = transacao.Valor
             };
 
-            _contasCorrentes.InserirLancamentoAsync(lancamentoDebito);
+            _lancamentos.InserirLancamentoAsync(lancamentoDebito);
 
             var realizarCredito = _contasCorrentes.RealizarCredito(transacao.ContaDestino.Numero, transacao.Valor);
 
@@ -45,12 +46,12 @@ namespace DebitoCredito.Servico
             var lancamentoCredito = new Lancamento
             {
                 Acao = "CREDITO",
-                IdTransacao = VariaveisGlobais.Transacao,
+                IdTransacao = VariaveisGlobais.Transacao.ToString(),
                 NumeroContaCorrente = transacao.ContaDestino.Numero,
                 Valor = transacao.Valor
             };
 
-            _contasCorrentes.InserirLancamentoAsync(lancamentoCredito);
+            _lancamentos.InserirLancamentoAsync(lancamentoCredito);
 
             return true;
         }

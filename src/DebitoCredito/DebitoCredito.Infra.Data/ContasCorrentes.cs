@@ -65,36 +65,6 @@ namespace DebitoCredito.Infra.Data
             }
         }
 
-        public async Task InserirLancamentoAsync(Lancamento lancamento)
-        {
-            try
-            {
-                using (var conn = new SqlConnection(VariaveisGlobais.Conn))
-                {
-                    var param = new
-                    {
-                        ACAO = lancamento.Acao,
-                        ID = lancamento.Id,
-                        IDTRANSACAO = lancamento.IdTransacao.ToString(),
-                        NUMEROCONTACORRENTE = lancamento.NumeroContaCorrente,
-                        VALOR = Convert.ToDecimal(lancamento.Valor),
-                        DATALANCAMENTO = lancamento.DataLancamento
-                    };
-
-                    var query = @"INSERT INTO LANCAMENTOS 
-                                (ID, IDTRANSACAO, ACAO, NUMEROCONTACORRENTE, VALOR, DATALANCAMENTO) 
-                            VALUES
-                                (@ID, @IDTRANSACAO, @ACAO, @NUMEROCONTACORRENTE, @VALOR, @DATALANCAMENTO)";
-
-                    await conn.ExecuteAsync(query, param, commandType: CommandType.Text);
-                }
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex.Message);
-            }
-        }
-
         public bool RealizarCredito(string contaDestino, decimal valor)
         {
             try
