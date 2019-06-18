@@ -40,7 +40,7 @@ namespace DebitoCredito.Servico
             var validarContaCadastradaDestino = _contasCorrentes.ValidarContaCadastrada(transacao.ContaDestino.Numero);
             if (!validarContaCadastradaOrigem || !validarContaCadastradaDestino)
             {
-                erros.Add("As contas correntes devem ser estar cadastradas");
+                erros.Add("As contas correntes devem estar cadastradas");
             }
 
             return erros;
