@@ -1,9 +1,12 @@
-﻿using DebitoCredito.Servico;
+﻿using DebitoCredito.Infra;
+using DebitoCredito.Servico;
 using Microsoft.AspNetCore.Mvc;
+using DebitoCredito.Infra.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.Extensions.Configuration;
+using DebitoCredito.Dominio.Interfaces.Infra;
 using Microsoft.Extensions.DependencyInjection;
 using DebitoCredito.Dominio.Interfaces.Servicos;
 
@@ -20,7 +23,10 @@ namespace DebitoCredito.Aplicacao
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<IContasCorrentes, ContasCorrentes>();
             services.AddTransient<ITransacaoServico, TransacaoServico>();
+
+            services.AddSingleton(VariaveisGlobais.Conn);
 
             services.AddSwaggerGen();
             services.AddSwaggerGen(c =>

@@ -1,12 +1,20 @@
 ﻿using System.Threading.Tasks;
 using System.Collections.Generic;
 using DebitoCredito.Dominio.Entidades;
+using DebitoCredito.Dominio.Interfaces.Infra;
 using DebitoCredito.Dominio.Interfaces.Servicos;
 
 namespace DebitoCredito.Servico
 {
     public class TransacaoServico : ITransacaoServico
     {
+        private readonly IContasCorrentes _contasCorrentes;
+
+        public TransacaoServico(IContasCorrentes contasCorrentes)
+        {
+            _contasCorrentes = contasCorrentes;
+        }
+
         public Task RealizarTransacao(ContaCorrente contaOrigem, ContaCorrente contaDestino, Lancamento lancamento)
         {
             throw new System.NotImplementedException();
@@ -26,6 +34,13 @@ namespace DebitoCredito.Servico
             if (!string.IsNullOrWhiteSpace(validarContasCorrentes))
             {
                 erros.Add(validarContasCorrentes);
+            }
+
+            var validarContaCadastradaOrigem = _contasCorrentes.ValidarContaCadastrada(transacao.ContaOrigem.Numero);
+            var validarContaCadastradaDestino = _contasCorrentes.ValidarContaCadastrada(transacao.ContaDestino.Numero);
+            if (!validarContaCadastradaOrigem || !validarContaCadastradaDestino)
+            {
+                erros.Add("As contas correntes devem ser estar cadastradas");
             }
 
             return erros;
