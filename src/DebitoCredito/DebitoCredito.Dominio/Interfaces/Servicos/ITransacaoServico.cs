@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DebitoCredito.Dominio.Entidades;
 
 namespace DebitoCredito.Dominio.Interfaces.Servicos
@@ -7,6 +6,6 @@ namespace DebitoCredito.Dominio.Interfaces.Servicos
     public interface ITransacaoServico
     {
         IEnumerable<string> ValidarTransacao(Transacao transacao);
-        Task RealizarTransacao(ContaCorrente contaOrigem, ContaCorrente contaDestino, Lancamento lancamento);
+        bool RealizarDebito(string contaOrigem, decimal valor);
     }
 }

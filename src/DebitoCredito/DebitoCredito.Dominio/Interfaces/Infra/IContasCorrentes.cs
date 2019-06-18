@@ -3,5 +3,6 @@
     public interface IContasCorrentes
     {
         bool ValidarContaCadastrada(string contaCorrente);
+        bool RealizarDebito(string contaOrigem, decimal valor);
     }
 }

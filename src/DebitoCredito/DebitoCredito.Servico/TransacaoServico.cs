@@ -15,9 +15,13 @@ namespace DebitoCredito.Servico
             _contasCorrentes = contasCorrentes;
         }
 
-        public Task RealizarTransacao(ContaCorrente contaOrigem, ContaCorrente contaDestino, Lancamento lancamento)
+        public bool RealizarDebito(string contaOrigem, decimal valor)
         {
-            throw new System.NotImplementedException();
+            // faz o débito no banco de dados 
+
+            // insere o registro na tabela de lancamentos
+
+            return false;
         }
 
         public IEnumerable<string> ValidarTransacao(Transacao transacao)

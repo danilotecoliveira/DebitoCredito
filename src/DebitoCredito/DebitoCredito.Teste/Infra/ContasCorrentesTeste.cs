@@ -27,5 +27,15 @@ namespace DebitoCredito.Teste.Infra
 
             Assert.Equal(esperado, resultado);
         }
+
+        [Theory]
+        [InlineData("0123", 1)]
+        [InlineData("0123", 0.99)]
+        public void Testar_Realizar_Debito(string contaCorrente, decimal valor)
+        {
+            var resultado = _contasCorrentes.RealizarDebito(contaCorrente, valor);
+
+            Assert.True(resultado);
+        }
     }
 }

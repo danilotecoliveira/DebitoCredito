@@ -34,6 +34,11 @@ namespace DebitoCredito.Aplicacao.Controllers
                     return StatusCode(HttpStatusCode.BadRequest.GetHashCode(), validarTransacao);
                 }
 
+                // faz o débito
+                _transacaoServico.RealizarDebito(transacao.ContaOrigem.Numero, transacao.Valor);
+
+                // faz o crédito
+
                 return StatusCode(HttpStatusCode.OK.GetHashCode());
             }
             catch (Exception ex)
